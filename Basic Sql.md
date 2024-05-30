@@ -20,7 +20,7 @@ The Users table will look like this:
 +----+----------+---------------+--------+
 | 1  |    Smith | John Smith    |   true |
 | 2  |  Venessa | Venessa Riite |   true |
-| 3  |  devabdul | Dev Abdul    |  false |
+| 3  |  devabdul| Dev Abdul    |  false |
 +----+----------+---------------+--------+
 
 ```
