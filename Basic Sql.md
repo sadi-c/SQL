@@ -12,6 +12,10 @@ Users - In the users table, you would have some data for your users like: userna
 Tasks - The tasks table would store all of the tasks that you are planning to do. The columns of the tasks table would be for example, task_name, status, due_date and priority.
 The Users table will look like this:
 
+
+
+//
+
 +----+----------+---------------+--------+
 | id | username | name          | active |
 +----+----------+---------------+--------+
@@ -19,6 +23,11 @@ The Users table will look like this:
 | 2  |  Venessa | Venessa Riite |   true |
 | 3  |  devabdul | Dev Abdul    |  false |
 +----+----------+---------------+--------+
+
+//
+
+
+
 
 Rundown of the table structure:
 
