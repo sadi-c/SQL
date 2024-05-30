@@ -1,9 +1,9 @@
 # SQL Notes #
 
-#Databases: 
+##  Databases: 
 - a database is a collection of data stored and structured in different database tables.
 
-#Tables and columns:
+## Tables and columns:
 -Each table has different columns which could contain different types of data.
 
 For example, if you have a todo list reminder app, you would have a database, and in your database, you would have different tables storing different information like:
