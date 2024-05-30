@@ -1,4 +1,9 @@
-# SQL Notes #
+### SQL Notes 
+
+What is SQL?
+
+SQL stands for Structured Query Language.
+It is a standard programming language specifically designed for managing and manipulating relational databases.
 
 ##  Databases: 
 - a database is a collection of data stored and structured in different database tables.
@@ -29,3 +34,18 @@ Rundown of the table structure:
 We have 4 columns: id, username, name and active.
 We also have 3 entries/users.
 The id column is a unique identifier of each user and is auto-incremented.
+
+## Data Types:
+
+CHAR: Fixed-length character string 
+VARCHAR: Variable-length character string. Max size is specified in parenthesis.
+TEXT: A string 
+INTEGER or INT: a integer value 
+BOOLEAN or BOOL: Holds a true or false value.
+DATE: Holds a date
+ DATE: Date (YYYY-MM-DD)
+ TIME: Time (HH:MI)
+ DATETIME: Date and time (YYYY-MM-DD HH:MI)
+ TIMESTAMP: Date and time with timezone
+ YEAR: Year
+
