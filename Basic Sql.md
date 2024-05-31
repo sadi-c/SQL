@@ -5,7 +5,7 @@ What is SQL?
 SQL stands for Structured Query Language.
 It is a standard programming language specifically designed for managing and manipulating relational databases.
 
-##  Databases: 
+###  Databases: 
 - a database is a collection of data stored and structured in different database tables.
 
 ## Tables and columns:
