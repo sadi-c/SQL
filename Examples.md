@@ -40,8 +40,15 @@ WHERE
 
 ```
 
-SELECT: Specifies the columns name from the students table and grade from the enrollments table.
-FROM: Indicates the primary table students to start the query.
-JOIN: Combines rows from the students, enrollments, and courses tables based on the related columns (students.id = enrollments.student_id and enrollments.course_id = courses.id).
-ON: Specifies the conditions for the joins.
-WHERE: Filters the results to include only those students who are enrolled in the Math course.
+** SELECT: Specifies the columns name from the students table and grade from the enrollments table.
+
+** FROM: Indicates the primary table students to start the query.
+
+** JOIN: Combines rows from the students, enrollments, and courses tables based on the related columns (students.id = enrollments.student_id and enrollments.course_id = courses.id).
+
+** ON: Specifies the conditions for the joins.
+
+** WHERE: Filters the results to include only those students who are enrolled in the Math course.
+
+
+
