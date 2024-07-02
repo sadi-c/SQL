@@ -72,3 +72,12 @@ FROM ARTIST AS ART
 RIGHT JOIN ALBUM AS ALB
 ON ART.ARTIST_ID = ALB.ARTIST_ID;
 ```
+
+**** Subquery - Query inside a query ****
+```
+Select s.supply_id, i.quantity, s.name, s.description
+FROM (SELECT * FROM investory WHERE base_id = 1) AS i
+RIGHT JOIN supply AS s 
+ON i.supply_id = s.supply_id
+ORDER BY s.suuply_id;
+```
