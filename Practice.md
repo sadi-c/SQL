@@ -231,3 +231,68 @@ ON o.account_id = a.id
 WHERE o.occurred_at BETWEEN '01-01-2015' AND '01-01-2016'
 ORDER BY o.occurred_at DESC;
 ```
+### Real Examples:
+
+## Finding % of views coming from 2 sources
+
+```
+WITH impr AS (
+    SELECT
+        date,
+        d.Source1,
+        s.device,
+        s.region,
+        SUM(view) AS total_View
+    FROM source s
+    INNER JOIN dataproviders d
+        ON d.providerid = s.dataproviderid
+    WHERE region IN (0, 4, 1, 139, 5, 170)
+        AND device IN (0, 128)
+        AND date >= DATE('2023-05-01')
+    GROUP BY date, d.Source1, s.device, s.region
+),
+
+percentage AS (
+    SELECT
+        date,
+        CASE
+            WHEN region = 0 THEN 'US'
+            WHEN region = 1 THEN 'UK'
+            WHEN region = 4 THEN 'CA'
+            WHEN region = 5 THEN 'AU'
+            WHEN region = 139 THEN 'DE'
+            WHEN region = 170 THEN 'NZ'
+            ELSE 'Other'
+        END AS region_name,
+        CASE
+            WHEN device = 0 THEN 'Desktop Display'
+            WHEN device = 128 THEN 'Desktop Video'
+            ELSE 'Other'
+        END AS device_name,
+        CASE
+            WHEN Source1 THEN 'Source1'
+            ELSE 'Source2'
+        END AS source,
+        total_View,
+        ROUND(
+            total_View * 1.0 /
+            (SUM(total_View) OVER (PARTITION BY date, region, device)),
+            2
+        ) AS percentage
+    FROM impr
+)
+
+SELECT
+    date,
+    region_name AS region,
+    device_name AS device,
+    source,
+    percentage,
+    total_View
+FROM percentage
+ORDER BY
+    date,
+    region,
+    device,
+    source;
+```
