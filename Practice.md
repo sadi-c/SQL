@@ -321,7 +321,7 @@ ORDER BY
 ```
 
 
-Daily Top Entity Performance Analysis 
+## Daily Top Entity Performance Analysis 
 
 ```
 WITH AggregatedData AS (
@@ -361,4 +361,24 @@ FROM RankedData
 WHERE Rank <= 100
 ORDER BY Date DESC, TotalMetric1 DESC;
 
+```
+
+## Finding spend and id details for a specific entity 
+
+```
+SELECT camPaths.crid AS ID, 
+       tag.name AS Brand,
+       SUM(spend) AS Total_Ad_Spend, 
+       SUM(impressions) AS Total_Impressions,
+       MIN(date) AS StartDate, 
+       MAX(date) AS EndDate
+FROM Crpath_camp campPaths
+JOIN cr cr ON cr.crid = camPaths.crid
+LEFT JOIN crtags tag ON tag.tagid = camPaths.crtagleafid
+WHERE Region = NA
+  AND Device IN (1,2,3,4,5)
+  AND date >= DATE('2023-01-01')
+  AND camPaths.camid = 12345
+GROUP BY camPaths.crid, tag.name
+ORDER BY Total_Ad_Spend DESC;
 ```
