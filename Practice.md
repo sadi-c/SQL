@@ -296,3 +296,69 @@ ORDER BY
     device,
     source;
 ```
+
+## % of Video Impressions by Device Over Time
+
+```
+SELECT
+    data_table.date AS Date,
+    device_table.device_name AS DeviceName,
+    1.0 * SUM(CASE WHEN creative_table.asset_id IS NOT NULL THEN data_table.impressions ELSE 0 END) / SUM(data_table.impressions) AS VideoPercentage
+FROM
+    data_table
+INNER JOIN
+    creative_table ON data_table.creative_id = creative_table.creative_id
+INNER JOIN
+    device_table ON data_table.device_id = device_table.id
+WHERE
+    data_table.date >= '2024-01-01'
+    AND device_table.id IN (129, 131)
+    AND creative_table.type = 105
+GROUP BY
+    data_table.date, device_table.device_name
+ORDER BY
+    data_table.date DESC;
+```
+
+
+Daily Top Entity Performance Analysis 
+
+```
+WITH AggregatedData AS (
+    SELECT
+        data.Date,
+        entity.Name AS EntityName,
+        SUM(data.Metric1) AS TotalMetric1,
+        SUM(data.Metric2) AS TotalMetric2
+    FROM DataPaths data
+    JOIN Site site ON data.SiteId = site.Id
+    JOIN Brand brand ON data.BrandId = brand.Id
+    JOIN Entity entity ON brand.EntityId = entity.Id
+    WHERE data.Region = 'Region1'
+      AND data.Device = 'DeviceType1'
+      AND data.Date >= '2022-01-01'
+      AND site.Name = 'SiteName1'
+      AND brand.Name = 'BrandName1'
+    GROUP BY data.Date, entity.Name
+),
+RankedData AS (
+    SELECT
+        Date,
+        EntityName,
+        TotalMetric1,
+        TotalMetric2,
+        ROW_NUMBER() OVER (PARTITION BY Date ORDER BY TotalMetric1 DESC) AS Rank
+    FROM AggregatedData
+)
+SELECT
+    Date,
+    EntityName,
+    TotalMetric1,
+    TotalMetric2,
+     ROUND((TotalMetric1 * 100.0 / SUM(TotalMetric1) OVER (PARTITION BY Date)), 2) AS MetricShare,
+    Rank
+FROM RankedData
+WHERE Rank <= 100
+ORDER BY Date DESC, TotalMetric1 DESC;
+
+```
